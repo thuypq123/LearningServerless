@@ -1,0 +1,37 @@
+tôi muốn thêm một api cho file yml của tôi:
+service: LearningServerless
+frameworkVersion: ">=1.28.0"
+provider:
+  name: aws
+  runtime: go1.x
+  # region: singapore
+  region: ap-southeast-1
+  stage: ${opt:stage, 'v1'}
+functions:
+  api:
+    handler: bin/main 
+    events: 
+      - http: 
+          path: /api
+          method: post
+    package:
+      patterns:
+        - 'bin/**'
+  api2:
+    handler: bin/api2 
+    events: 
+      - http: 
+          path: /api2
+          method: post
+    package:
+      patterns:
+        - 'bin/**'
+  api3:
+    handler: bin/api3
+    events: 
+      - http: 
+          path: /api3
+          method: post
+    package:
+      patterns:
+        - 'bin/**'
