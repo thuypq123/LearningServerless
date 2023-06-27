@@ -9,28 +9,37 @@ provider:
   stage: ${opt:stage, 'v1'}
 functions:
   api:
-    handler: bin/main 
+    handler: bin/bai2_1 
     events: 
       - http: 
-          path: /api
+          path: /bai2_1
           method: post
     package:
       patterns:
         - 'bin/**'
   api2:
-    handler: bin/api2 
+    handler: bin/bai2_2
     events: 
       - http: 
-          path: /api2
+          path: /bai2_2
           method: post
     package:
       patterns:
         - 'bin/**'
   api3:
-    handler: bin/api3
+    handler: bin/bai2_3
     events: 
       - http: 
-          path: /api3
+          path: /bai2_3
+          method: post
+    package:
+      patterns:
+        - 'bin/**'
+  api4:
+    handler: bin/bai2_4
+    events: 
+      - http: 
+          path: /bai2_4
           method: post
     package:
       patterns:
