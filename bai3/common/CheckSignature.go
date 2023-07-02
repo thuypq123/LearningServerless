@@ -15,9 +15,11 @@ func CheckSignature(request Request, data User, signature, secretKey string) boo
 	requestId := request.RequestId
 	phone := data.Phone
 	username := data.Username
+
 	// print(requestId + phone + username + secretKey)
 	log.Println(requestId + phone + username + secretKey)
 	h.Write([]byte(requestId + phone + username + secretKey))
+
 	// Get result and encode as hexadecimal string
 	sha := hex.EncodeToString(h.Sum(nil))
 	log.Println("sha:", sha)

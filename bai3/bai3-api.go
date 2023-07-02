@@ -1,6 +1,5 @@
 package main
 
-// import lambda and write handler function
 import (
 	"bai3/common"
 	"context"
@@ -14,68 +13,87 @@ import (
 	"github.com/go-playground/validator"
 )
 
-// write function handler for lambda
+// handler function to process the request and return a response
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var (
+		// Define variables to store request and response data
 		req common.UserRequest
 		res common.UserResponse
 	)
-	// get request body
+
+	// Unmarshal the JSON body of the request into the UserRequest struct
 	json.Unmarshal([]byte(request.Body), &req)
-	// log request
+
+	// Log the unmarshalled request data for debugging purposes
 	log.Println("Request:", req)
-	// validate request with validator struct
+
+	// Validate the UserRequest struct based on predefined rules in the struct's tag
 	validate := validator.New()
 	err := validate.Struct(req)
+
+	// If validation errors exist, log them and return an error response
 	if err != nil {
-		log.Println("-Lỗi khi phân tích yêu cầu:", err)
-		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Lỗi khi phân tích yêu cầu"}, nil
+		log.Println("- Error while parsing the request:", err)
+		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when parsing the request"}, nil
 	}
-	// verify signature with secret key with hmac CheckSignature function
+
+	// Verify that the signature of the request is valid
 	signatureIsValid := common.CheckSignature(req.Request, req.Data, req.Request.Signature, "golang")
+
+	// If the signature is not valid, log it and return an error response
 	if !signatureIsValid {
 		log.Println("Invalid signature")
 		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Invalid signature"}, nil
 	}
-	// verify phone with VerifyPhone function
+
+	// Convert phone number from string to integer
 	numberPhone, err := strconv.Atoi(req.Data.Phone)
+
+	// If there's an error in conversion, log it and return an error response
 	if err != nil {
-		fmt.Println("Error when convert phone to int:", err)
-		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when handle number phone"}, nil
+		fmt.Println("Error when converting phone to integer:", err)
+		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when handling phone number"}, nil
 	}
+
+	// Verify the validity of the phone number
 	phoneIsValid, err := common.VerifyPhone(numberPhone)
-	if err != nil {
-		log.Println("Error when verify phone:", err)
-		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when verify phone"}, nil
+
+	// If there's an error during verification or if the phone number is invalid, log it and return an error response
+	if err != nil || !phoneIsValid {
+		log.Println("Error when verifying phone:", err)
+		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when verifying phone"}, nil
 	}
-	if !phoneIsValid {
-		log.Println("Phone is invalid")
-		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Phone is invalid"}, nil
-	}
-	// create user with Api
+
+	// Create a user using the provided API
 	UserResponse, err := common.CreateUser(req)
+
+	// If there's an error during user creation or if the ResponseCode is not equal to "200", log it and return an error response
+	if err != nil || UserResponse.ResponseCode != "200" {
+		log.Println("Error when creating user:", err)
+		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when creating user"}, nil
+	}
+	// Marshal the response struct back into JSON
+	responseBody, err := json.Marshal(res)
+
 	if err != nil {
-		log.Println("Error when create user:", err)
-		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when create user"}, nil
+		log.Println("Error when creating response:", err)
+		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Error when creating response"}, nil
 	}
-	if UserResponse.ResponseCode != "200" {
-		log.Println("Create user failed")
-		return events.APIGatewayProxyResponse{StatusCode: 400, Body: "Create user failed"}, nil
-	}
-	// create response
+
+	// Fill the response struct with necessary details
 	res.ResponseCode = "00"
 	res.Response.ResponseID = req.Request.RequestId
 	res.ResponseMessage = "Success"
 	res.Response.ResponseTime = req.Request.RequestTime
 
-	// create response data
-	responseBody, _ := json.Marshal(res)
+	// Return the successful response
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Body:       string(responseBody),
 	}, nil
 }
 
+// The main function where the handler is registered and the lambda function starts
 func main() {
 	lambda.Start(handler)
 }
