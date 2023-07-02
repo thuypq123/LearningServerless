@@ -83,10 +83,10 @@
               }
             }
           },
-          "ApiLogGroup": {
+          "Api1LogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/LearningServerless-v1-api"
+              "LogGroupName": "/aws/lambda/LearningServerless-v1-api1"
             }
           },
           "Api2LogGroup": {
@@ -99,12 +99,6 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/LearningServerless-v1-api3"
-            }
-          },
-          "Api4LogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/LearningServerless-v1-api4"
             }
           },
           "IamRoleLambdaExecution": {
@@ -185,18 +179,18 @@
               }
             }
           },
-          "ApiLambdaFunction": {
+          "Api1LambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/LearningServerless/v1/1687887634207-2023-06-27T17:40:34.207Z/LearningServerless.zip"
+                "S3Key": "serverless/LearningServerless/v1/1688319324393-2023-07-02T17:35:24.393Z/LearningServerless.zip"
               },
-              "Handler": "bin/bai2_1",
+              "Handler": "bin/api2",
               "Runtime": "go1.x",
-              "FunctionName": "LearningServerless-v1-api",
+              "FunctionName": "LearningServerless-v1-api1",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -207,7 +201,7 @@
               }
             },
             "DependsOn": [
-              "ApiLogGroup"
+              "Api1LogGroup"
             ]
           },
           "Api2LambdaFunction": {
@@ -217,9 +211,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/LearningServerless/v1/1687887634207-2023-06-27T17:40:34.207Z/LearningServerless.zip"
+                "S3Key": "serverless/LearningServerless/v1/1688319324393-2023-07-02T17:35:24.393Z/LearningServerless.zip"
               },
-              "Handler": "bin/bai2_2",
+              "Handler": "bin/bai2_1",
               "Runtime": "go1.x",
               "FunctionName": "LearningServerless-v1-api2",
               "MemorySize": 1024,
@@ -242,9 +236,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/LearningServerless/v1/1687887634207-2023-06-27T17:40:34.207Z/LearningServerless.zip"
+                "S3Key": "serverless/LearningServerless/v1/1688319324393-2023-07-02T17:35:24.393Z/LearningServerless.zip"
               },
-              "Handler": "bin/bai2_3",
+              "Handler": "bin/bai3",
               "Runtime": "go1.x",
               "FunctionName": "LearningServerless-v1-api3",
               "MemorySize": 1024,
@@ -260,69 +254,34 @@
               "Api3LogGroup"
             ]
           },
-          "Api4LambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/LearningServerless/v1/1687887634207-2023-06-27T17:40:34.207Z/LearningServerless.zip"
-              },
-              "Handler": "bin/bai2_4",
-              "Runtime": "go1.x",
-              "FunctionName": "LearningServerless-v1-api4",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "Api4LogGroup"
-            ]
-          },
-          "ApiLambdaVersionhJfxILjSmgf6XEf7G5Mmw8kgN7Tcgh5Kv5viKxsW4": {
+          "Api1LambdaVersion9RmZltJiuvhbwX6T0Y73r025i9sC6uPp3jjxgMyFg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "ApiLambdaFunction"
+                "Ref": "Api1LambdaFunction"
               },
-              "CodeSha256": "plkwMynTK93O5pA9bKqVs7iNewjA3isuOy5B1YIg1Io="
+              "CodeSha256": "QwkNPyWROTZBapUWg/sw3NurkZEScBRxyTIcRbyuSB4="
             }
           },
-          "Api2LambdaVersionzEgxNDtQgCg1S0EdOJdZBIheDWo0TWT4clwwWzv0o": {
+          "Api2LambdaVersiond46HGAtiU1Uytd9lkgqvyuQuLv338HzjoqWp1KJ7ls": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "Api2LambdaFunction"
               },
-              "CodeSha256": "plkwMynTK93O5pA9bKqVs7iNewjA3isuOy5B1YIg1Io="
+              "CodeSha256": "QwkNPyWROTZBapUWg/sw3NurkZEScBRxyTIcRbyuSB4="
             }
           },
-          "Api3LambdaVersion9jS03i0vwkoh0l4Y6gK6JWczax2zT7jYtTlDHRDkts": {
+          "Api3LambdaVersionCjYhFXaV1FG4scpB8ZQDxZtAec7GGfp21V7VuiqAlU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "Api3LambdaFunction"
               },
-              "CodeSha256": "plkwMynTK93O5pA9bKqVs7iNewjA3isuOy5B1YIg1Io="
-            }
-          },
-          "Api4LambdaVersionfxDPvuEQJnlLwDQd0nIAYNFosJqElJFDyNd9tZZNoU": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "Api4LambdaFunction"
-              },
-              "CodeSha256": "plkwMynTK93O5pA9bKqVs7iNewjA3isuOy5B1YIg1Io="
+              "CodeSha256": "QwkNPyWROTZBapUWg/sw3NurkZEScBRxyTIcRbyuSB4="
             }
           },
           "ApiGatewayRestApi": {
@@ -337,7 +296,7 @@
               "Policy": ""
             }
           },
-          "ApiGatewayResourceBai21": {
+          "ApiGatewayResourceApi2": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -346,13 +305,13 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "bai2_1",
+              "PathPart": "api2",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceBai22": {
+          "ApiGatewayResourceApi21": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -361,13 +320,13 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "bai2_2",
+              "PathPart": "api2_1",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceBai23": {
+          "ApiGatewayResourceBai3": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -376,34 +335,19 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "bai2_3",
+              "PathPart": "bai3",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceBai24": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "PathPart": "bai2_4",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayMethodBai21Post": {
+          "ApiGatewayMethodApi2Post": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceBai21"
+                "Ref": "ApiGatewayResourceApi2"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -428,7 +372,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "ApiLambdaFunction",
+                          "Api1LambdaFunction",
                           "Arn"
                         ]
                       },
@@ -440,16 +384,16 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "ApiLambdaPermissionApiGateway"
+              "Api1LambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodBai22Post": {
+          "ApiGatewayMethodApi21Post": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceBai22"
+                "Ref": "ApiGatewayResourceApi21"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -489,13 +433,13 @@
               "Api2LambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodBai23Post": {
+          "ApiGatewayMethodBai3Post": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceBai23"
+                "Ref": "ApiGatewayResourceBai3"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -535,53 +479,7 @@
               "Api3LambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodBai24Post": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "POST",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceBai24"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "Api4LambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            },
-            "DependsOn": [
-              "Api4LambdaPermissionApiGateway"
-            ]
-          },
-          "ApiGatewayDeployment1687887631992": {
+          "ApiGatewayDeployment1688319322681": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -590,18 +488,17 @@
               "StageName": "v1"
             },
             "DependsOn": [
-              "ApiGatewayMethodBai21Post",
-              "ApiGatewayMethodBai22Post",
-              "ApiGatewayMethodBai23Post",
-              "ApiGatewayMethodBai24Post"
+              "ApiGatewayMethodApi2Post",
+              "ApiGatewayMethodApi21Post",
+              "ApiGatewayMethodBai3Post"
             ]
           },
-          "ApiLambdaPermissionApiGateway": {
+          "Api1LambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "ApiLambdaFunction",
+                  "Api1LambdaFunction",
                   "Arn"
                 ]
               },
@@ -706,43 +603,6 @@
                 ]
               }
             }
-          },
-          "Api4LambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "Api4LambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
           }
         },
         "Outputs": {
@@ -754,19 +614,19 @@
               "Name": "sls-LearningServerless-v1-ServerlessDeploymentBucketName"
             }
           },
-          "ApiLambdaFunctionQualifiedArn": {
+          "Api1LambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionhJfxILjSmgf6XEf7G5Mmw8kgN7Tcgh5Kv5viKxsW4"
+              "Ref": "Api1LambdaVersion9RmZltJiuvhbwX6T0Y73r025i9sC6uPp3jjxgMyFg"
             },
             "Export": {
-              "Name": "sls-LearningServerless-v1-ApiLambdaFunctionQualifiedArn"
+              "Name": "sls-LearningServerless-v1-Api1LambdaFunctionQualifiedArn"
             }
           },
           "Api2LambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "Api2LambdaVersionzEgxNDtQgCg1S0EdOJdZBIheDWo0TWT4clwwWzv0o"
+              "Ref": "Api2LambdaVersiond46HGAtiU1Uytd9lkgqvyuQuLv338HzjoqWp1KJ7ls"
             },
             "Export": {
               "Name": "sls-LearningServerless-v1-Api2LambdaFunctionQualifiedArn"
@@ -775,19 +635,10 @@
           "Api3LambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "Api3LambdaVersion9jS03i0vwkoh0l4Y6gK6JWczax2zT7jYtTlDHRDkts"
+              "Ref": "Api3LambdaVersionCjYhFXaV1FG4scpB8ZQDxZtAec7GGfp21V7VuiqAlU"
             },
             "Export": {
               "Name": "sls-LearningServerless-v1-Api3LambdaFunctionQualifiedArn"
-            }
-          },
-          "Api4LambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "Api4LambdaVersionfxDPvuEQJnlLwDQd0nIAYNFosJqElJFDyNd9tZZNoU"
-            },
-            "Export": {
-              "Name": "sls-LearningServerless-v1-Api4LambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -904,12 +755,12 @@
     },
     "pluginsData": {},
     "functions": {
-      "api": {
-        "handler": "bin/bai2_1",
+      "api1": {
+        "handler": "bin/api2",
         "events": [
           {
             "http": {
-              "path": "bai2_1",
+              "path": "api2",
               "method": "post",
               "integration": "AWS_PROXY"
             }
@@ -920,19 +771,19 @@
             "bin/**"
           ]
         },
-        "name": "LearningServerless-v1-api",
+        "name": "LearningServerless-v1-api1",
         "memory": 1024,
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionhJfxILjSmgf6XEf7G5Mmw8kgN7Tcgh5Kv5viKxsW4"
+        "versionLogicalId": "Api1LambdaVersion9RmZltJiuvhbwX6T0Y73r025i9sC6uPp3jjxgMyFg"
       },
       "api2": {
-        "handler": "bin/bai2_2",
+        "handler": "bin/bai2_1",
         "events": [
           {
             "http": {
-              "path": "bai2_2",
+              "path": "api2_1",
               "method": "post",
               "integration": "AWS_PROXY"
             }
@@ -948,14 +799,14 @@
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "Api2LambdaVersionzEgxNDtQgCg1S0EdOJdZBIheDWo0TWT4clwwWzv0o"
+        "versionLogicalId": "Api2LambdaVersiond46HGAtiU1Uytd9lkgqvyuQuLv338HzjoqWp1KJ7ls"
       },
       "api3": {
-        "handler": "bin/bai2_3",
+        "handler": "bin/bai3",
         "events": [
           {
             "http": {
-              "path": "bai2_3",
+              "path": "bai3",
               "method": "post",
               "integration": "AWS_PROXY"
             }
@@ -971,30 +822,7 @@
         "timeout": 6,
         "runtime": "go1.x",
         "vpc": {},
-        "versionLogicalId": "Api3LambdaVersion9jS03i0vwkoh0l4Y6gK6JWczax2zT7jYtTlDHRDkts"
-      },
-      "api4": {
-        "handler": "bin/bai2_4",
-        "events": [
-          {
-            "http": {
-              "path": "bai2_4",
-              "method": "post",
-              "integration": "AWS_PROXY"
-            }
-          }
-        ],
-        "package": {
-          "patterns": [
-            "bin/**"
-          ]
-        },
-        "name": "LearningServerless-v1-api4",
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "go1.x",
-        "vpc": {},
-        "versionLogicalId": "Api4LambdaVersionfxDPvuEQJnlLwDQd0nIAYNFosJqElJFDyNd9tZZNoU"
+        "versionLogicalId": "Api3LambdaVersionCjYhFXaV1FG4scpB8ZQDxZtAec7GGfp21V7VuiqAlU"
       }
     },
     "configValidationMode": "warn",
@@ -1007,15 +835,14 @@
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
-      },
-      "tôi muốn thêm một api cho file yml của tôi": null
+      }
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "C:\\Users\\THUYPQ123\\Desktop\\learning\\serverless\\withGo\\.serverless\\LearningServerless.zip"
+    "artifact": "/home/thuypq123/Desktop/LearningServerless/.serverless/LearningServerless.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/LearningServerless/v1/1687887634207-2023-06-27T17:40:34.207Z",
+    "artifactDirectoryName": "serverless/LearningServerless/v1/1688319324393-2023-07-02T17:35:24.393Z",
     "artifact": "LearningServerless.zip"
   }
 }

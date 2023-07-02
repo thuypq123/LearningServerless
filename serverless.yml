@@ -1,46 +1,36 @@
-tôi muốn thêm một api cho file yml của tôi:
 service: LearningServerless
-frameworkVersion: ">=1.28.0"
+frameworkVersion: '>=1.28.0'
 provider:
-  name: aws
-  runtime: go1.x
-  # region: singapore
-  region: ap-southeast-1
-  stage: ${opt:stage, 'v1'}
+    name: aws
+    runtime: go1.x
+    # region: singapore
+    region: ap-southeast-1
+    stage: ${opt:stage, 'v1'}
 functions:
-  api:
-    handler: bin/bai2_1 
-    events: 
-      - http: 
-          path: /bai2_1
-          method: post
-    package:
-      patterns:
-        - 'bin/**'
-  api2:
-    handler: bin/bai2_2
-    events: 
-      - http: 
-          path: /bai2_2
-          method: post
-    package:
-      patterns:
-        - 'bin/**'
-  api3:
-    handler: bin/bai2_3
-    events: 
-      - http: 
-          path: /bai2_3
-          method: post
-    package:
-      patterns:
-        - 'bin/**'
-  api4:
-    handler: bin/bai2_4
-    events: 
-      - http: 
-          path: /bai2_4
-          method: post
-    package:
-      patterns:
-        - 'bin/**'
+    api1:
+        handler: bin/api2
+        events:
+            - http:
+                  path: /api2
+                  method: post
+        package:
+            patterns:
+                - 'bin/**'
+    api2:
+        handler: bin/bai2_1
+        events:
+            - http:
+                  path: /api2_1
+                  method: post
+        package:
+            patterns:
+                - 'bin/**'
+    api3:
+        handler: bin/bai3
+        events:
+            - http:
+                  path: /bai3
+                  method: post
+        package:
+            patterns:
+                - 'bin/**'

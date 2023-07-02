@@ -54,21 +54,21 @@ func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 	}
 
 	// Kiểm tra tính hợp lệ của yêu cầu
-	err = validateRequest(req)
-	if err != nil {
-		response := Response{
-			ResponseID:      req.RequestID,
-			ResponseTime:    time.Now(),
-			ResponseCode:    "400",
-			ResponseMessage: "Yêu cầu không hợp lệ",
-		}
-		responseBody, _ := json.Marshal(response)
-		log.Println("Yêu cầu không hợp lệ:", err)
-		return events.APIGatewayProxyResponse{
-			StatusCode: 400,
-			Body:       string(responseBody),
-		}, nil
-	}
+	// err = validateRequest(req)
+	// if err != nil {
+	// 	response := Response{
+	// 		ResponseID:      req.RequestID,
+	// 		ResponseTime:    time.Now(),
+	// 		ResponseCode:    "400",
+	// 		ResponseMessage: "Yêu cầu không hợp lệ",
+	// 	}
+	// 	responseBody, _ := json.Marshal(response)
+	// 	log.Println("Yêu cầu không hợp lệ:", err)
+	// 	return events.APIGatewayProxyResponse{
+	// 		StatusCode: 400,
+	// 		Body:       string(responseBody),
+	// 	}, nil
+	// }
 
 	// Kết nối tới cơ sở dữ liệu PostgreSQL
 	db, err := sql.Open("postgres", "postgres://thuypq123:t1xHgWF2DCAN@ep-empty-paper-000226.ap-southeast-1.aws.neon.tech/neondb")
